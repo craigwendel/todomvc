@@ -41,18 +41,18 @@ app.delete('/api/todos:id', function (req, res) {
 
 app.post('/api/todos/', function (req, res) {
   if (req.body._id) {
-    Todo.findOne({'_id': req.params._id})
+    Todo.findOne({title: req.body.title})
     .then(function (todo) {
       todo.title = req.body.title
       todo.order = req.body.order
       todo.completed = req.body.completed
       todo.save().then(function (todo) {
-        console.log('This is the editedtask info from the if')
+        console.log('This is the edited task info from the if')
         res.json(todo)
       })
     })
   } else {
-    let todo = new Todo()
+    var todo = new Todo()
     todo.title = req.body.title
     todo.order = req.body.order
     todo.completed = req.body.completed
